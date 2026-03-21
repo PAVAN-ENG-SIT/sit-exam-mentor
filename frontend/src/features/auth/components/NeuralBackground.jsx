@@ -7,7 +7,7 @@ import { useCallback, useMemo } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
-export default function NeuralBackground({ typingIntensity = 0 }) {
+export default function NeuralBackground({ typingIntensity = 0, isDark = true }) {
   // Initialize the tsParticles engine
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine);
@@ -19,6 +19,8 @@ export default function NeuralBackground({ typingIntensity = 0 }) {
     const normalizedIntensity = Math.min(Math.max(typingIntensity, 0), 1);
     const speed = 0.4 + normalizedIntensity * 1.5;
     const linkOpacity = 0.15 + normalizedIntensity * 0.4;
+    const particleColor = isDark ? '#ffffff' : '#4f6ef7';
+    const linkColor    = isDark ? '#ffffff' : '#4f6ef7';
 
     return {
       background: {
@@ -34,9 +36,9 @@ export default function NeuralBackground({ typingIntensity = 0 }) {
         },
       },
       particles: {
-        color: { value: "#ffffff" },
+        color: { value: particleColor },
         links: {
-          color: "#ffffff",
+          color: linkColor,
           distance: 140,
           enable: true,
           opacity: linkOpacity,
@@ -60,10 +62,10 @@ export default function NeuralBackground({ typingIntensity = 0 }) {
       },
       detectRetina: true,
     };
-  }, [typingIntensity]);
+  }, [typingIntensity, isDark]);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-[#050505]">
+    <div className={`absolute inset-0 w-full h-full z-0 overflow-hidden transition-colors duration-300 ${isDark ? 'bg-[#050505]' : 'bg-[#f0f4ff]'}`}>
       <Particles
         id="tsparticles"
         init={particlesInit}

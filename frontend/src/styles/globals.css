@@ -3,3 +3,16 @@
 /* Tailwind v4: enable class-based dark mode for the element and its children */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ── Scrollbar utilities ─────────────────────────────────────── */
+/* Hide scrollbar but keep scroll functionality (Webkit + Firefox) */
+.scrollbar-hide {
+  -ms-overflow-style: none;   /* IE/Edge */
+  scrollbar-width: none;      /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;              /* Chrome/Safari/Opera */
+}
+
+/* ── Body/HTML base reset ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; padding: 0; }

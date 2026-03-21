@@ -31,7 +31,7 @@ export default function LiveConsole() {
   }, []);
 
   return (
-    <div className="mt-8 bg-black/40 border border-white/10 rounded-xl backdrop-blur-md p-5 pb-6 h-40 overflow-hidden font-mono text-xs sm:text-sm text-green-400 shadow-inner relative">
+    <div className="mt-8 bg-black/80 border border-white/10 rounded-xl backdrop-blur-md p-5 pb-6 h-40 overflow-hidden font-mono text-xs sm:text-sm text-green-400 shadow-inner relative">
       <AnimatePresence>
         {lines.map((line, i) => (
           <motion.div

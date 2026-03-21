@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────────────────────────
 import { motion } from 'framer-motion';
 
-export default function LoginCard({ children, glowIntensity = 0 }) {
+export default function LoginCard({ children, glowIntensity = 0, isDark = true }) {
   // Map typing intensity (0 to 1) to a pixel radius and opacity for the glow effect
   const blurRadius = 15 + glowIntensity * 50;
   const opacity = 0.05 + glowIntensity * 0.25;
@@ -18,17 +18,23 @@ export default function LoginCard({ children, glowIntensity = 0 }) {
       className="relative w-full max-w-md z-10"
     >
       {/* Background glow that reacts to typing */}
-      <div 
+      <div
         className="absolute inset-0 rounded-2xl transition-all duration-300 pointer-events-none"
         style={{
           boxShadow: `0 0 ${blurRadius}px ${glowColor}, inset 0 0 20px rgba(255,255,255,0.02)`
         }}
       />
-      
-      {/* The Glassmorphism Card */}
-      <div className="relative backdrop-blur-2xl bg-black/50 border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-8 sm:p-10 overflow-hidden">
-        {/* Subtle top glare effect */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+      {/* The Glassmorphism Card — dark or light variant */}
+      <div className={`relative backdrop-blur-2xl rounded-2xl p-8 sm:p-10 overflow-hidden transition-colors duration-300
+        ${isDark
+          ? 'bg-black/50 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]'
+          : 'bg-white/80 border border-gray-200 shadow-[0_8px_40px_rgba(0,0,0,0.12)]'
+        }`}
+      >
+        {/* Subtle top glare */}
+        <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent to-transparent
+          ${isDark ? 'via-white/20' : 'via-blue-300/40'}`} />
         {children}
       </div>
     </motion.div>
